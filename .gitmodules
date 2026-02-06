@@ -1,0 +1,3 @@
+[submodule "thirdparty/seastar"]
+	path = thirdparty/seastar
+	url = https://github.com/scylladb/seastar
