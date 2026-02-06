@@ -1,0 +1,26 @@
+cmake_minimum_required (VERSION 3.16)
+project(seastarlab C CXX)
+
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+option(WITH_CCACHE "Build with ccache." ON)
+if(WITH_CCACHE)
+    find_program(CCACHE_PROGRAM ccache)
+    if(CCACHE_PROGRAM)
+        message(STATUS "ccache found: ${CCACHE_PROGRAM}")
+        set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE "${CCACHE_PROGRAM}")
+        set_property(GLOBAL PROPERTY RULE_LAUNCH_LINK "${CCACHE_PROGRAM}")
+    else()
+        message(WARNING "ccache not found. Proceeding without ccache.")
+    endif()
+endif()
+
+find_package(Seastar REQUIRED)
+add_library(Valgrind::valgrind INTERFACE IMPORTED)
+
+option(TUTORIAL "enable tutorial exercise" ON)
+if (TUTORIAL)
+    add_subdirectory(tutorial)
+endif()

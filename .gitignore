@@ -41,6 +41,6 @@
 *.dwo
 
 compile_commands.json
-build/
-.cache/
-
+build
+.cache
+.vscode
