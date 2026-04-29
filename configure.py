@@ -17,6 +17,7 @@ def main():
 
     root_dir = os.path.dirname(os.path.abspath(__file__))
     seastar_dir = os.path.join(root_dir, "thirdparty", "seastar")
+    seastar_build_dir = os.path.join(seastar_dir, "build", args.mode)
     build_dir = os.path.join(root_dir, "build")
 
     if args.submodule:
@@ -25,7 +26,6 @@ def main():
         run_cmd(["git", "submodule", "update", "--init", "--recursive"])
 
         # 2. auto compile seastar
-        seastar_build_dir = os.path.join(seastar_dir, "build", args.mode)
         if not os.path.exists(os.path.join(seastar_build_dir, "libseastar.a")):
             print("--- Compile Seastar...")
             run_cmd([
